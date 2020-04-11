@@ -3,7 +3,8 @@
 # @Time    : 2020/4/11 16:45
 # @Author  : Eiya_ming
 # @Email   : eiyaming@163.com
-# @File    : github_picbed.py
+# @File    : github_picbed_test.py
+# todo: it is a test. not valid
 
 # github图床（码云）
 # 1. github图床建立
@@ -67,6 +68,10 @@ class PicBed():
         res = os.popen(cmd)
         print(res.read())
 
+    def change_link(self):
+        fpath, fname = os.path.split(self.file)
+        mycopyfile(self.file, fname)
+
 
 def interface():
     root = Tk()
@@ -85,6 +90,7 @@ def interface():
     # Button(root, text="路径选择", command=bed.select_localbed_Path).grid(row=2, column=2)
     # row2
     Button(root, text="复制&上传", command=bed.copy_upload).grid(row=2, column=0)
+    Button(root, text="创建网图.md备份", command=bed.change_link).grid(row=2, column=0)
 
     root.mainloop()
 
