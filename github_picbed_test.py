@@ -69,8 +69,28 @@ class PicBed():
         print(res.read())
 
     def change_link(self):
-        fpath, fname = os.path.split(self.file)
-        mycopyfile(self.file, fname)
+        with open(self.file, 'r', encoding='utf-8') as f:
+            pg = f.read()
+            # 正则匹配
+            t = re.findall("!\[.*\](.*)", pg)
+            # 原地逐条修改
+            for link in t:
+                if 'https://' in link or "http://" in link: continue
+                if '\\' in link:
+                    filename = link.split('\\')[-1].split(')')[0]
+                else:
+                    filename = link.split('/')[-1].split(')')[0]
+                rp = '(' + self.url_head + self.folder_name + '/' + filename + ')'
+                print(link)
+                pg = pg.replace(link, rp)
+                print(rp)
+            # tt = re.findall("!\[.*\](.*)", pg)
+            # print(tt)
+            # 写文件到。。。
+            with open('test.md', 'w', encoding='utf-8') as ff:
+                ff.write(pg)
+                print('test.md'+" write ok!")
+
 
 
 def interface():
@@ -90,7 +110,7 @@ def interface():
     # Button(root, text="路径选择", command=bed.select_localbed_Path).grid(row=2, column=2)
     # row2
     Button(root, text="复制&上传", command=bed.copy_upload).grid(row=2, column=0)
-    Button(root, text="创建网图.md备份", command=bed.change_link).grid(row=2, column=0)
+    Button(root, text="创建网图.md备份", command=bed.change_link).grid(row=2, column=2)
 
     root.mainloop()
 
@@ -106,5 +126,5 @@ def mycopyfile(srcfile, dstfile):
         print("move %s -> %s" % (srcfile, dstfile))
 
 
-
 interface()
+# PicBed.change_link(PicBed)
