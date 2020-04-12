@@ -38,8 +38,8 @@ class PicBed():
         self.asset = StringVar()
         self.localbed = StringVar()
         self.md = StringVar()
-        self.bed_head = 'E:/self_study/git/MyImage/'
-        self.url_head = 'https://raw.githubusercontent.com/hahahaMing/MyImage/master/'
+        self.bed_head = 'E:/self_study/git/MyImage/'  # 克隆到本地的仓库文件夹位置 + '/'。
+        self.url_head = 'https://raw.githubusercontent.com/hahahaMing/MyImage/master/'  # 仓库随便找个图片，取master/和前面所有的部分。
         self.folder_name = ''
         self.filename = 'untitled'
 
@@ -89,10 +89,9 @@ class PicBed():
             # tt = re.findall("!\[.*\](.*)", pg)
             # print(tt)
             # 写文件到。。。
-            with open('w'+self.filename, 'w', encoding='utf-8') as ff:
+            with open('w_' + self.filename, 'w', encoding='utf-8') as ff:
                 ff.write(pg)
-                print('w'+self.filename+" write ok!")
-
+                print('w_' + self.filename + " write ok!")
 
 
 def interface():
