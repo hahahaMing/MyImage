@@ -41,6 +41,7 @@ class PicBed():
         self.bed_head = 'E:/self_study/git/MyImage/'
         self.url_head = 'https://raw.githubusercontent.com/hahahaMing/MyImage/master/'
         self.folder_name = ''
+        self.filename = 'untitled'
 
     def selectPath(self):
         self.folder = askdirectory()
@@ -55,6 +56,7 @@ class PicBed():
     def selectFile(self):
         self.file = tkinter.filedialog.askopenfilename()
         self.md.set(self.file)
+        self.filename = self.file.split('/')[-1]
 
     def copy_upload(self):
         files = os.listdir(self.folder)
@@ -87,9 +89,9 @@ class PicBed():
             # tt = re.findall("!\[.*\](.*)", pg)
             # print(tt)
             # 写文件到。。。
-            with open('test.md', 'w', encoding='utf-8') as ff:
+            with open('w'+self.filename, 'w', encoding='utf-8') as ff:
                 ff.write(pg)
-                print('test.md'+" write ok!")
+                print('w'+self.filename+" write ok!")
 
 
 
